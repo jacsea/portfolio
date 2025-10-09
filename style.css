@@ -1,6 +1,109 @@
+:root {
+  --color-accent: oklch(68% 85% 250);
+}
+
 body {
   /* Set line height to 1.5 times the font size
 	   and use the OS’s UI font as the website font
 	 */
   font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: auto;
+  padding: 15px;
+  accent-color: var(--color-accent);
+}
+
+nav {
+  display: flex;
+  margin-bottom: 50px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: oklch(80% 3% 200);
+}
+
+nav ul {
+  display: contents
+}
+
+nav ul li {
+  display: contents
+}
+
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+}
+
+label {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+}
+
+input {
+  font: inherit
+}
+
+textarea {
+  font: inherit
+}
+
+button {
+  font: inherit;
+  grid-column: 1 / -1;
+}
+
+.current {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5em;
+  border-bottom-width: 0.4em;
+  border-bottom-style: solid;
+  border-bottom-color: oklch(80% 3% 200);
+  padding-bottom: 0.1em;
+}
+
+.noncurrent {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.noncurrent:hover {
+  border-bottom-width: 0.4em;
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-accent);
+  background-color: oklch(from var(--color-accent) 95% 5% h);
+  padding-bottom: 0.1em;
+}
+
+.projects{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
+
+article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
+
+article h2{
+  margin: 0
+}
+
+h1 {
+  font-size: 400%;
+}
+
+h1, h2, h3, h4, h5, h6{
+  line-height: 1.1;
+  text-wrap: balance;
 }
