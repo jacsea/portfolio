@@ -1,5 +1,6 @@
 :root {
-  --color-accent: oklch(68% 85% 250);
+  --color-accent: oklch(65% 50% 0);
+  color-scheme: light dark;
 }
 
 body {
@@ -18,7 +19,7 @@ nav {
   margin-bottom: 50px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: oklch(80% 3% 200);
+  border-bottom-color: oklch(50% 10% 200 / 40%);
 }
 
 nav ul {
@@ -54,6 +55,10 @@ button {
   grid-column: 1 / -1;
 }
 
+select {
+  font: inherit;
+}
+
 .current {
   flex: 1;
   text-decoration: none;
@@ -63,7 +68,7 @@ button {
   padding: 0.5em;
   border-bottom-width: 0.4em;
   border-bottom-style: solid;
-  border-bottom-color: oklch(80% 3% 200);
+  border-bottom-color: oklch(50% 10% 200 / 40%);
   padding-bottom: 0.1em;
 }
 
@@ -79,7 +84,7 @@ button {
   border-bottom-width: 0.4em;
   border-bottom-style: solid;
   border-bottom-color: var(--color-accent);
-  background-color: oklch(from var(--color-accent) 95% 5% h);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   padding-bottom: 0.1em;
 }
 
@@ -106,4 +111,11 @@ h1 {
 h1, h2, h3, h4, h5, h6{
   line-height: 1.1;
   text-wrap: balance;
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 10rem;
+  font-size: 80%;
 }
