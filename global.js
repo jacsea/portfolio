@@ -29,7 +29,7 @@ document.body.prepend(nav);
 const BASE_PATH =
   location.hostname === 'localhost' || location.hostname === '127.0.0.1'
     ? '/' // Local server
-    : '/website/'; // GitHub Pages repo name
+    : '/portfolio/'; // GitHub Pages repo name
 
 for (let p of pages) {
   let url = p.url;
