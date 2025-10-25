@@ -2,61 +2,61 @@
     {
         "title": "Deceptive Visualizations",
         "year": "2025",
-        "image": "images/Percent Change Graph.png",
+        "image": "/portfolio/images/Percent Change Graph.png",
         "description": "A project aiming to create deceptive visualizations. On this project I based my deceptive visualizations on percent versus abolute change to show how each one affects the data."
     },
     {
         "title": "Expository Visualization",
         "year": "2025",
-        "image": "images/Project 1.png",
+        "image": "/portfolio/images/Project 1.png",
         "description": "The goal of this project was to communicate an idea based on a small data set. In this I communicated that Whole Foods has consistent outliers in terms of nonprocessed coffee products."
     },
     {
         "title": "Machine Learning with Congressional Voting",
         "year": "2024",
-        "image": "images/DSC 207 Final.png",
+        "image": "/portfolio/images/DSC 207 Final.png",
         "description": "In this project I used various machine learning techniques on congressional voting data from 1984, asking and answering various questions about the data set."
     },
     {
         "title": "EDA Mini Project",
         "year": "2024",
-        "image": "images/DSC 207 mini project.png",
+        "image": "/portfolio/images/DSC 207 mini project.png",
         "description": "A small project experimenting with various EDA methods on a happiness index of countries in 2016."
     },
     {
         "title": "Big Data - Amazon Reviews",
         "year": "2025",
-        "image": "images/Amazon Review Project.png",
+        "image": "/portfolio/images/Amazon Review Project.png",
         "description": "In this project, I was part of a group and we aimed to predict Amazon review scores, and had to use Spark to work with the massive 50gb+ dataset."
     },
     {
         "title": "EDA Individual Research Project",
         "year": "2022",
-        "image": "images/Stat 580 Irp.png",
+        "image": "/portfolio/images/Stat 580 Irp.png",
         "description": "This project involved researching an R package and presenting its function, I researched an R package built around streamlining the EDA process named DataExplorer."
     },
     {
         "title": "Interactive Maps Individual Research Project",
         "year": "2023",
-        "image": "images/Stat 596 Irp.png",
+        "image": "/portfolio/images/Stat 596 Irp.png",
         "description": "This project involved researching an R package and presenting what it does. I researched a package named mapview that allowed for the simple creation of interactive maps."
     },
     {
         "title": "NFL Historical Offensive Playstyle Analysis",
         "year": "2022",
-        "image": "images/Stat 410 FInal.png",
+        "image": "/portfolio/images/Stat 410 FInal.png",
         "description": "This project's goal was to research and use a technique not taught in the course, give an introduction on the technique, and use the techinque in my own research. I used PCA to determine differences in NFL playstyle throughout history."
     },
     {
         "title": "A Spatial Analysis of the Strike Zone",
         "year": "2023",
-        "image": "images/Stat 596 final.png",
+        "image": "/portfolio/images/Stat 596 final.png",
         "description": "This project aimed to use spatial analysis techniques to analyze Shohei Ohtani as both a pitcher and batter."
     },
     {
         "title": "NFLviz",
         "year": "2022",
-        "image": "images/NFLviz.png",
+        "image": "/portfolio/images/NFLviz.png",
         "description": "The goal of this project was to freate an R package. As a group we created a package that allowed for the easy creation of visualizations based on NFL data."
     },
     {
