@@ -94,6 +94,12 @@ select {
   gap: 1em;
 }
 
+.projects img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 article {
   display: grid;
   grid-template-rows: subgrid;
@@ -118,4 +124,22 @@ h1, h2, h3, h4, h5, h6{
   top: 1rem;
   right: 10rem;
   font-size: 80%;
+}
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 40px;
+}
+
+#profile-stats dt {
+  grid-row: 1;
+  text-align: center;
+  font-size: 120%
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  text-align: center;
+  margin: 0;
 }
