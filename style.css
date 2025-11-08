@@ -211,3 +211,65 @@ path {
     fill: var(--color);
   }
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.stats > div {
+  padding: 1em;
+  border: 1px solid oklch(80% 5% 200 / 50%);
+  border-radius: 0.5em;
+}
+
+.gridlines line {
+  stroke: oklch(80% 5% 200 / 50%);
+  stroke-opacity: 0.5;
+}
+
+.gridlines path.domain {
+  stroke: oklch(80% 5% 200 / 50%);
+  stroke-opacity: 0.5;
+}
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
+dl.info {
+  /* ... other styles ... */
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; /* 5 + 3 */
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
+circle.selected {
+  fill: #ff6b6b;
+}
