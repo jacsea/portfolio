@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacob Sease · Data Science Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f6f6f4;
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #555550;
+      --color-text-tertiary: #999990;
+      --color-border-primary: #999990;
+      --color-border-secondary: #d0d0c8;
+      --color-border-tertiary: #e8e8e4;
+      --color-link: #2563eb;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-link {
+      font-size: 13px;
+      color: var(--color-link);
+      text-decoration: none;
+    }
+
+    .hero-link:hover { text-decoration: underline; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 0.5px solid var(--color-border-secondary);
+      color: var(--color-text-secondary);
+    }
+
+    /* STATS */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    /* SECTION */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* FILTERS */
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 0.5px solid var(--color-border-secondary);
+      background: transparent;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--color-bg-secondary);
+      color: var(--color-text-primary);
+      border-color: var(--color-border-primary);
+    }
+
+    /* GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* CARDS */
+    .project-card {
+      background: var(--color-bg);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover { border-color: var(--color-border-primary); }
+    .project-card.expanded { grid-column: 1 / -1; }
+
+    .card-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      border-radius: 8px 0 0 8px;
+    }
+
+    .card-inner { padding-left: 0.5rem; }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-category {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+    }
+
+    .card-year { font-size: 11px; color: var(--color-text-tertiary); }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--color-bg-secondary);
+      color: var(--color-text-secondary);
+    }
+
+    .card-link {
+      font-size: 12px;
+      color: var(--color-link);
+      text-decoration: none;
+      margin-left: auto;
+    }
+
+    .card-link:hover { text-decoration: underline; }
+
+    /* EXPANDED */
+    .expanded-content {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .project-card.expanded .expanded-content { display: block; }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .exp-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-body {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .result-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      min-width: 110px;
+    }
+
+    .result-bar-bg {
+      flex: 1;
+      height: 5px;
+      background: var(--color-bg-secondary);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .result-bar { height: 100%; border-radius: 999px; }
+
+    .result-val {
+      font-size: 12px;
+      font-weight: 500;
+      min-width: 42px;
+      text-align: right;
+      color: var(--color-text-primary);
+    }
+
+    .decade-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .decade-label {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      min-width: 44px;
+    }
+
+    .decade-desc {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+
+    .decade-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .finding-row { margin-bottom: 10px; }
+
+    .finding-text {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .finding-text strong {
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .fn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .fn-item {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+    }
+
+    .fn-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      font-family: monospace;
+      margin-bottom: 3px;
+    }
+
+    .fn-desc {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .feature-list { list-style: none; padding: 0; margin: 0; }
+
+    .feature-list li {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      padding: 5px 0;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      display: flex;
+      gap: 8px;
+    }
+
+    .feature-list li:last-child { border-bottom: none; }
+
+    .feat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    code {
+      font-size: 12px;
+      background: var(--color-bg-secondary);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .expand-hint {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-top: 0.5rem;
+    }
+
+    /* FOOTER */
+    .portfolio-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      text-align: center;
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    @media (max-width: 640px) {
+      .hero { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .fn-grid { grid-template-columns: 1fr; }
+      .project-card.expanded { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Portfolio</p>
+      <h1 class="hero-name">Jacob Sease</h1>
+      <p class="hero-title">
+        Master of Data Science · UC San Diego<br>
+        B.S. Statistics · San Diego State University
+      </p>
+      <div class="hero-links">
+        <a class="hero-link" href="mailto:jakesease@yahoo.com">✉ jakesease@yahoo.com</a>
+      </div>
+      <div class="tags">
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Big Data</span>
+        <span class="tag">Statistical Modeling</span>
+        <span class="tag">Sports Analytics</span>
+        <span class="tag">Data Visualization</span>
+        <span class="tag">R Package Dev</span>
+        <span class="tag">Python</span>
+        <span class="tag">R</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><p class="stat-label">Projects</p><p class="stat-value">13</p></div>
+      <div class="stat-card"><p class="stat-label">Domains covered</p><p class="stat-value">6</p></div>
+      <div class="stat-card"><p class="stat-label">Years active</p><p class="stat-value">4</p></div>
+      <div class="stat-card"><p class="stat-label">Languages</p><p class="stat-value">R, Py</p></div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section-header">
+    <h2 class="section-title">Projects</h2>
+    <span class="section-count" id="showing-count">Showing 13 of 13</span>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" data-filter="all" onclick="filterCards(this)">All</button>
+    <button class="filter-btn" data-filter="ml" onclick="filterCards(this)">Machine Learning</button>
+    <button class="filter-btn" data-filter="stats" onclick="filterCards(this)">Statistics</button>
+    <button class="filter-btn" data-filter="python" onclick="filterCards(this)">Python</button>
+    <button class="filter-btn" data-filter="nlp" onclick="filterCards(this)">NLP</button>
+    <button class="filter-btn" data-filter="viz" onclick="filterCards(this)">Data Viz</button>
+    <button class="filter-btn" data-filter="spatial" onclick="filterCards(this)">Spatial</button>
+    <button class="filter-btn" data-filter="sports" onclick="filterCards(this)">Sports Analytics</button>
+    <button class="filter-btn" data-filter="vision" onclick="filterCards(this)">Computer Vision</button>
+    <button class="filter-btn" data-filter="package" onclick="filterCards(this)">R Package</button>
+  </div>
+
+  <div class="projects-grid" id="grid">
+
+    <!-- P1: Anomaly Detection -->
+    <div class="project-card" data-category="ml vision" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#5DCAA5;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Capstone · Computer Vision</span><span class="card-year">2026</span></div>
+        <h3 class="card-title">Unsupervised Multimodal Anomaly Detection on MVTec 3D-AD</h3>
+        <p class="card-desc">Built a three-stage deep learning pipeline to detect industrial surface defects using synchronized RGB and 3D depth (Z-Map) data — without any labeled defect examples during training.</p>
+        <div class="card-footer"><span class="card-tag">PyTorch</span><span class="card-tag">ResNet-18</span><span class="card-tag">PatchCore</span><span class="card-tag">SSIM</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">Multimodal anomaly detection on MVTec 3D-AD (13.25 GB, 10 categories, 2,656 training samples). Three-stage pipeline: baseline CAE → bottleneck-constrained CAE with SSIM loss → PatchCore fusing RGB and Z-Map features via ResNet-18 and K-Center Greedy coreset subsampling.</p>
+              <br><p class="exp-label">My role</p>
+              <p class="exp-body">Led Stage 3 PatchCore — feature-space construction, coreset retrieval logic, and late-fusion strategy. Produced the project's largest gain: +28.1% mean AUROC over baseline.</p>
+            </div>
+            <div>
+              <p class="exp-label">AUROC by category (Stage 3)</p>
+              <div style="margin-top:8px;">
+                <div class="result-row"><span class="result-label">Bagel</span><div class="result-bar-bg"><div class="result-bar" style="width:93.5%;background:#5DCAA5;"></div></div><span class="result-val">0.935</span></div>
+                <div class="result-row"><span class="result-label">Dowel</span><div class="result-bar-bg"><div class="result-bar" style="width:90.9%;background:#5DCAA5;"></div></div><span class="result-val">0.909</span></div>
+                <div class="result-row"><span class="result-label">Rope</span><div class="result-bar-bg"><div class="result-bar" style="width:90.1%;background:#5DCAA5;"></div></div><span class="result-val">0.901</span></div>
+                <div class="result-row"><span class="result-label">Cable Gland</span><div class="result-bar-bg"><div class="result-bar" style="width:80.6%;background:#5DCAA5;"></div></div><span class="result-val">0.806</span></div>
+                <div class="result-row"><span class="result-label">Avg (all 10)</span><div class="result-bar-bg"><div class="result-bar" style="width:73.9%;background:#378ADD;"></div></div><span class="result-val">0.739</span></div>
+              </div>
+              <p style="font-size:11px;color:var(--color-text-tertiary);margin-top:8px;">vs. 0.577 mean AUROC at baseline</p>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P2: Power Outage -->
+    <div class="project-card" data-category="ml python stats" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#F5A623;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Machine Learning · Python</span><span class="card-year">2026</span></div>
+        <h3 class="card-title">Predicting Power Outage Duration: Does Weather Play a Role?</h3>
+        <p class="card-desc">Built a regression pipeline to predict how long US power outages last (2000–2016), progressing from a linear baseline to a tuned Random Forest, with full missingness and fairness analysis.</p>
+        <div class="card-footer">
+          <span class="card-tag">Python</span><span class="card-tag">scikit-learn</span><span class="card-tag">Random Forest</span><span class="card-tag">Permutation Tests</span>
+          <a class="card-link" href="https://nolan-lo.github.io/Predicting_Power_Outage_Duration/" target="_blank" onclick="event.stopPropagation()">Live site →</a>
+        </div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">1,534 major US power outages (2000–2016). Full pipeline: data cleaning, EDA, NMAR missingness analysis, permutation hypothesis testing, and a two-stage prediction model. Severe weather confirmed to produce significantly longer outages (p ≈ 0.0, 10,000 permutations).</p>
+              <br><p class="exp-label">Team</p><p class="exp-body">3-person collaboration. Contributed across the full pipeline from EDA through model evaluation.</p>
+            </div>
+            <div>
+              <p class="exp-label">Model progression (RMSE, lower is better)</p>
+              <div style="margin-top:8px;">
+                <div class="result-row"><span class="result-label">Naive baseline</span><div class="result-bar-bg"><div class="result-bar" style="width:100%;background:#ddd;"></div></div><span class="result-val">7,847 min</span></div>
+                <div class="result-row"><span class="result-label">Linear baseline</span><div class="result-bar-bg"><div class="result-bar" style="width:91.5%;background:#F5A623;"></div></div><span class="result-val">7,184 min</span></div>
+                <div class="result-row"><span class="result-label">Random Forest</span><div class="result-bar-bg"><div class="result-bar" style="width:65%;background:#F5A623;"></div></div><span class="result-val">improved</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P3: Amazon -->
+    <div class="project-card" data-category="ml python nlp" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#FF9900;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">NLP · Big Data · Machine Learning</span><span class="card-year">2025</span></div>
+        <h3 class="card-title">Amazon Product Rating Predictor</h3>
+        <p class="card-desc">Used PySpark on the UCSD Supercomputer to process 300M+ Amazon reviews and predict star ratings from sentiment analysis and product metadata — at a scale requiring distributed computing.</p>
+        <div class="card-footer">
+          <span class="card-tag">Python</span><span class="card-tag">PySpark</span><span class="card-tag">NLP</span><span class="card-tag">HPC</span>
+          <a class="card-link" href="https://github.com/Nolan-Lo/Amazon_Product_Rating_Predictor" target="_blank" onclick="event.stopPropagation()">GitHub →</a>
+        </div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">McAuley Lab Amazon Reviews dataset — 300M+ reviews — requiring PySpark on UCSD's supercomputer. Features from review text (sentiment, length, title) and product metadata (category, price, verified purchase status).</p>
+              <br><p class="exp-label">Team</p>
+              <p class="exp-body">Multi-milestone team collaboration. Contributed to feature engineering, sentiment analysis pipeline, and model evaluation.</p>
+            </div>
+            <div>
+              <p class="exp-label">What made this project unique</p>
+              <ul class="feature-list">
+                <li><div class="feat-dot" style="background:#FF9900;"></div><strong>Scale:</strong> 300M+ reviews required distributed PySpark on UCSD's HPC cluster</li>
+                <li><div class="feat-dot" style="background:#FF9900;"></div><strong>NLP + structured fusion:</strong> Combined text sentiment with metadata</li>
+                <li><div class="feat-dot" style="background:#FF9900;"></div><strong>Business framing:</strong> Anticipate customer sentiment across categories and price points</li>
+                <li><div class="feat-dot" style="background:#FF9900;"></div><strong>Dataset:</strong> McAuley Lab benchmark — widely used NLP dataset, zero null values</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P4: Voter Turnout -->
+    <div class="project-card" data-category="viz python" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#4A90D9;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Data Visualization · Python</span><span class="card-year">2025</span></div>
+        <h3 class="card-title">Inspecting U.S. Voter Turnout (1980–2022)</h3>
+        <p class="card-desc">Built an interactive Mapbox choropleth exploring VEP and turnout rate across all 50 states from 1980–2022, with per-state trend lines on click and a presidential vs. midterm toggle.</p>
+        <div class="card-footer">
+          <span class="card-tag">Python</span><span class="card-tag">Mapbox</span><span class="card-tag">Interactive Viz</span>
+          <a class="card-link" href="https://d25molina.github.io/DSC209R_FP/" target="_blank" onclick="event.stopPropagation()">Live site →</a>
+        </div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">3-person project. Interactive storytelling with year slider, hover tooltips, click-through state time-series, and presidential vs. midterm toggle.</p>
+              <br><p class="exp-label">Key takeaway</p>
+              <p class="exp-body">VEP and VEP turnout rate do not move together — population growth doesn't translate to proportional participation increases.</p>
+            </div>
+            <div>
+              <p class="exp-label">Design decisions</p>
+              <ul class="feature-list">
+                <li><div class="feat-dot" style="background:#4A90D9;"></div>Mapbox choropleth with year slider spanning every election 1980–2022</li>
+                <li><div class="feat-dot" style="background:#4A90D9;"></div>Hover tooltip showing VEP and turnout rate per state</li>
+                <li><div class="feat-dot" style="background:#4A90D9;"></div>Click-through to per-state time-series across all years</li>
+                <li><div class="feat-dot" style="background:#4A90D9;"></div>Presidential vs. midterm toggle to highlight election-type effects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P5: Grocery Viz -->
+    <div class="project-card" data-category="viz" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#52A875;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Data Visualization · Consumer Data</span><span class="card-year">2025</span></div>
+        <h3 class="card-title">Price vs. Price per Calorie Across Retailers and Food Processing Levels</h3>
+        <p class="card-desc">Designed a multi-panel scatter visualization revealing that Whole Foods coffee products are consistent, dramatic outliers in price-per-calorie across a faceted breakdown by food processing category.</p>
+        <div class="card-footer"><span class="card-tag">Python</span><span class="card-tag">matplotlib</span><span class="card-tag">Data Viz</span><span class="card-tag">Design Principles</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">Grocery pricing data from Target, Walmart, and Whole Foods subdivided by four NOVA food processing categories. Shared axes across all subplots. Unprocessed panel enlarged to spotlight the Whole Foods coffee cluster.</p>
+              <br><p class="exp-label">Key finding</p>
+              <p class="exp-body">Price per calorie is near zero for virtually all products — except Whole Foods coffee, which forms a distinct, consistently elevated cluster with no comparable products at any other retailer.</p>
+            </div>
+            <div>
+              <p class="exp-label">Design decisions</p>
+              <ul class="feature-list">
+                <li><div class="feat-dot" style="background:#52A875;"></div>Shared axes and scale across all four subplots</li>
+                <li><div class="feat-dot" style="background:#52A875;"></div>Unprocessed panel enlarged to visually emphasize the anomaly</li>
+                <li><div class="feat-dot" style="background:#52A875;"></div>Retailer colors use actual brand hex codes for instant recognition</li>
+                <li><div class="feat-dot" style="background:#52A875;"></div>Redundant color + shape encoding per retailer</li>
+                <li><div class="feat-dot" style="background:#52A875;"></div>Dashed ellipse annotation groups the Whole Foods coffee outliers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P6: Persuasive Viz -->
+    <div class="project-card" data-category="viz" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#C76E6E;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Data Visualization · Design Ethics</span><span class="card-year">2025</span></div>
+        <h3 class="card-title">Persuasive vs. Deceptive Visualization: Abortion Clinic Changes</h3>
+        <p class="card-desc">Designed two contrasting visualizations of the same dataset — one supporting, one undermining the same proposition — using only legitimate design choices to show how framing shapes perception.</p>
+        <div class="card-footer">
+          <span class="card-tag">Data Viz</span><span class="card-tag">Visual Rhetoric</span><span class="card-tag">Design Ethics</span>
+          <a class="card-link" href="https://jacsea.github.io/Project2/" target="_blank" onclick="event.stopPropagation()">Live site →</a>
+        </div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">Guttmacher Institute abortion clinic data (2017–2020). Core deception: <strong>percent change vs. absolute change</strong> tell completely different stories from identical raw numbers.</p>
+            </div>
+            <div>
+              <p class="exp-label">Design decisions</p>
+              <ul class="feature-list">
+                <li><div class="feat-dot" style="background:#C76E6E;"></div><strong>FOR:</strong> Percent change inflates small-base states like Kentucky</li>
+                <li><div class="feat-dot" style="background:#C76E6E;"></div><strong>AGAINST:</strong> Absolute change shifts dominance to California</li>
+                <li><div class="feat-dot" style="background:#C76E6E;"></div>Line chart implies trend despite no data between 2017 and 2020</li>
+                <li><div class="feat-dot" style="background:#C76E6E;"></div>Neutral palette avoids political color connotation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P7: Congressional Voting -->
+    <div class="project-card" data-category="ml python" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#E05C8A;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Machine Learning · Python</span><span class="card-year">2024</span></div>
+        <h3 class="card-title">Predicting Political Party from Congressional Voting Records</h3>
+        <p class="card-desc">Applied supervised learning, k-means clustering, and a neural network to 1984 House voting data — achieving up to 97.9% accuracy predicting party alignment.</p>
+        <div class="card-footer"><span class="card-tag">Python</span><span class="card-tag">scikit-learn</span><span class="card-tag">Neural Network</span><span class="card-tag">K-Means</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">UCI Congressional Voting Records dataset (435 representatives, 16 binary vote features, 232 complete records). Three research questions: supervised learning, unsupervised clustering, and neural network.</p>
+            </div>
+            <div>
+              <p class="exp-label">Model comparison</p>
+              <div style="margin-top:8px;">
+                <div class="result-row"><span class="result-label">Neural Network</span><div class="result-bar-bg"><div class="result-bar" style="width:97.87%;background:#E05C8A;"></div></div><span class="result-val">97.87%</span></div>
+                <div class="result-row"><span class="result-label">Decision Tree</span><div class="result-bar-bg"><div class="result-bar" style="width:95.74%;background:#E05C8A;"></div></div><span class="result-val">95.74%</span></div>
+                <div class="result-row"><span class="result-label">Naive Bayes</span><div class="result-bar-bg"><div class="result-bar" style="width:91.49%;background:#E05C8A;"></div></div><span class="result-val">91.49%</span></div>
+                <div class="result-row"><span class="result-label">Linear Reg (R²)</span><div class="result-bar-bg"><div class="result-bar" style="width:85.88%;background:#E05C8A;"></div></div><span class="result-val">0.859</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P8: World Happiness -->
+    <div class="project-card" data-category="python stats" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#3BAF8A;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">EDA · Python</span><span class="card-year">2024</span></div>
+        <h3 class="card-title">Exploring the 2016 World Happiness Index</h3>
+        <p class="card-desc">Structured EDA on 157 countries — investigating regional confidence intervals, inter-variable correlations, and whether a custom freedom/trust/generosity score predicts overall happiness.</p>
+        <div class="card-footer"><span class="card-tag">Python</span><span class="card-tag">pandas</span><span class="card-tag">seaborn</span><span class="card-tag">matplotlib</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Key findings</p>
+              <div class="finding-row"><div class="finding-text"><strong>Q1:</strong> Middle East & N. Africa, Sub-Saharan Africa, Latin America have widest confidence intervals.</div></div>
+              <div class="finding-row"><div class="finding-text"><strong>Q2:</strong> Economy × Health strongest (r = 0.837); Generosity × Economy nearly zero (r = −0.026).</div></div>
+              <div class="finding-row"><div class="finding-text"><strong>Q3:</strong> Freedom + Trust + Generosity positive but noisy — Economy, Family, Health are stronger drivers.</div></div>
+            </div>
+            <div>
+              <p class="exp-label">Dataset</p>
+              <p class="exp-body">157 countries, 13 variables, no missing values. Three targeted questions with deliberate viz choices: bar chart for categorical, heatmap for correlation, scatter for predictive relationship.</p>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P9: MLB GAM -->
+    <div class="project-card" data-category="stats sports spatial" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#EF9F27;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Statistics · Sports Analytics</span><span class="card-year">2023</span></div>
+        <h3 class="card-title">Spatial Dependence in MLB Pitching and Hitting</h3>
+        <p class="card-desc">Used generalized additive models with 2D spatial smoothing to map Shohei Ohtani's pitch location effectiveness as both hitter and pitcher, benchmarked against Verlander and Bellinger.</p>
+        <div class="card-footer"><span class="card-tag">R</span><span class="card-tag">GAM</span><span class="card-tag">Logistic Regression</span><span class="card-tag">Statcast</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">Pitch-by-pitch Statcast data for Ohtani, Verlander, and Bellinger. Logistic GAMs with 2D spatial smoothing over plate coordinates revealing zone-level effectiveness across pitch types and handedness.</p>
+              <br><p class="exp-label">Team</p>
+              <p class="exp-body">4-person collaboration. Contributed to model specification, binary variable engineering, and pitch-type coefficient interpretation.</p>
+            </div>
+            <div>
+              <p class="exp-label">Key findings</p>
+              <div class="finding-row"><div class="finding-text"><strong>Ohtani hitting:</strong> Hot zone high-inside; knuckle-curves (est. −27.0) are his weakness.</div></div>
+              <div class="finding-row"><div class="finding-text"><strong>Vs. LHH:</strong> 4-seam fastball (−44.8) and sweeper (−44.3) most effective low and away.</div></div>
+              <div class="finding-row"><div class="finding-text"><strong>Vs. RHH:</strong> Slider weakest (est. +34.1); elevated pitches get hit hard.</div></div>
+              <div class="finding-row"><div class="finding-text"><strong>Vs. Verlander:</strong> Split-finger best strikeout pitch (est. +1.30, p = 0.011).</div></div>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P10: mapview -->
+    <div class="project-card" data-category="spatial stats" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#378ADD;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Spatial Analysis · R Tutorial</span><span class="card-year">2023</span></div>
+        <h3 class="card-title">Interactive Spatial Visualization with the mapview Package</h3>
+        <p class="card-desc">End-to-end tutorial on R's mapview package — point maps, kriging predictions, choropleth maps, and multi-layer composition, applied to a San Diego cycling injury dataset.</p>
+        <div class="card-footer"><span class="card-tag">R</span><span class="card-tag">mapview</span><span class="card-tag">Kriging</span><span class="card-tag">sf / sp</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">IRP surveying mapview for interactive spatial visualization. Applied to Meuse river heavy metals, NYC cancer data, and an original SD cycling injury analysis with bike route overlay.</p>
+            </div>
+            <div>
+              <p class="exp-label">Techniques demonstrated</p>
+              <ul class="feature-list">
+                <li><div class="feat-dot" style="background:#378ADD;"></div>Interactive point maps with clickable popups</li>
+                <li><div class="feat-dot" style="background:#378ADD;"></div>CRS reprojection to lon/lat</li>
+                <li><div class="feat-dot" style="background:#378ADD;"></div>Matérn variogram kriging with hover predictions</li>
+                <li><div class="feat-dot" style="background:#378ADD;"></div>Choropleth maps of areal data</li>
+                <li><div class="feat-dot" style="background:#378ADD;"></div>Multi-layer: bike routes over SD injury choropleth</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P11: NFLviz -->
+    <div class="project-card" data-category="package sports stats" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#D85A30;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">R Package · Sports Analytics</span><span class="card-year">2022</span></div>
+        <h3 class="card-title">NFLviz: An R Package for NFL Offensive Analytics</h3>
+        <p class="card-desc">Co-authored a published R package providing one-line visualization functions for NFL play-by-play EDA — covering QB efficiency, receiver EPA, pass depth, completion rates, and down success.</p>
+        <div class="card-footer"><span class="card-tag">R</span><span class="card-tag">nflfastR</span><span class="card-tag">ggplot2</span><span class="card-tag">Roxygen2</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">5-person GPL-3 R package (v1.0) wrapping nflfastR data into analyst-ready visualizations. Full vignette with worked examples.</p>
+              <br><p class="exp-label">My contribution</p>
+              <p class="exp-body">Designed the <code>data_clean()</code> pipeline joining play-by-play data with roster positions — the backbone powering <code>prod_plot()</code> and <code>pass_comp_plot()</code>.</p>
+            </div>
+            <div>
+              <p class="exp-label">Functions in the package</p>
+              <div class="fn-grid">
+                <div class="fn-item"><p class="fn-name">qb_succ_epa_plot()</p><p class="fn-desc">QB EPA/play vs. success rate</p></div>
+                <div class="fn-item"><p class="fn-name">qb_density()</p><p class="fn-desc">2D completion heatmap</p></div>
+                <div class="fn-item"><p class="fn-name">prod_plot()</p><p class="fn-desc">EPA by air yards by position</p></div>
+                <div class="fn-item"><p class="fn-name">pass_comp_plot()</p><p class="fn-desc">Completion % by depth</p></div>
+                <div class="fn-item"><p class="fn-name">wr_comp_plot()</p><p class="fn-desc">Weekly EPA trend lines</p></div>
+                <div class="fn-item"><p class="fn-name">plot_down_success()</p><p class="fn-desc">Success rate by down & distance</p></div>
+                <div class="fn-item"><p class="fn-name">avg_pass_comp()</p><p class="fn-desc">Pass rate in neutral situations</p></div>
+                <div class="fn-item"><p class="fn-name">data_clean()</p><p class="fn-desc">PBP + roster join pipeline</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P12: DataExplorer -->
+    <div class="project-card" data-category="stats package" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#9B6DCA;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">EDA · R Tutorial</span><span class="card-year">2022</span></div>
+        <h3 class="card-title">Automated EDA with the DataExplorer Package</h3>
+        <p class="card-desc">Surveyed R's DataExplorer package for automated EDA, demonstrating its full visualization suite on the top 500 highest-budget films.</p>
+        <div class="card-footer"><span class="card-tag">R</span><span class="card-tag">DataExplorer</span><span class="card-tag">EDA</span><span class="card-tag">ggplot2</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">8 DataExplorer functions demonstrated on 500 movies by budget. Full auto-generated HTML report via <code>create_report()</code>. Key trade-off: speed and simplicity vs. customization depth.</p>
+            </div>
+            <div>
+              <p class="exp-label">Functions demonstrated</p>
+              <div class="fn-grid">
+                <div class="fn-item"><p class="fn-name">introduce()</p><p class="fn-desc">Dataset summary</p></div>
+                <div class="fn-item"><p class="fn-name">plot_missing()</p><p class="fn-desc">% missing per variable</p></div>
+                <div class="fn-item"><p class="fn-name">plot_bar()</p><p class="fn-desc">All discrete variables</p></div>
+                <div class="fn-item"><p class="fn-name">plot_histogram()</p><p class="fn-desc">All continuous variables</p></div>
+                <div class="fn-item"><p class="fn-name">plot_qq()</p><p class="fn-desc">Q-Q plots with grouping</p></div>
+                <div class="fn-item"><p class="fn-name">plot_correlation()</p><p class="fn-desc">Correlation heatmap</p></div>
+                <div class="fn-item"><p class="fn-name">plot_prcomp()</p><p class="fn-desc">PC variance + loadings</p></div>
+                <div class="fn-item"><p class="fn-name">create_report()</p><p class="fn-desc">Full HTML EDA report</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+    <!-- P13: NFL PCA -->
+    <div class="project-card" data-category="stats sports" onclick="toggleExpand(this)">
+      <div class="card-accent" style="background:#7F77DD;"></div>
+      <div class="card-inner">
+        <div class="card-meta"><span class="card-category">Statistics · Sports Analytics</span><span class="card-year">2022</span></div>
+        <h3 class="card-title">Evolving NFL Playstyles: A Principal Component Analysis (1949–2021)</h3>
+        <p class="card-desc">Applied PCA to 73 years of NFL offensive statistics to uncover how football strategy shifted across decades — from a run-dominated game to a pass-first era.</p>
+        <div class="card-footer"><span class="card-tag">R</span><span class="card-tag">PCA</span><span class="card-tag">Sports Analytics</span><span class="card-tag">Data Visualization</span></div>
+        <div class="expanded-content">
+          <div class="exp-grid">
+            <div>
+              <p class="exp-label">Overview</p>
+              <p class="exp-body">73 years of NFL data (1949–2021). 19 features normalized → PCA to 2 components: PC1 run-pass balance (65.2% variance), PC2 scoring success. Each decade a distinct, minimally-overlapping cluster.</p>
+            </div>
+            <div>
+              <p class="exp-label">Decade-by-decade story</p>
+              <div style="margin-top:8px;">
+                <div class="decade-row"><div class="decade-dot" style="background:#AFA9EC;"></div><span class="decade-label">1950s</span><span class="decade-desc">Heavy run, efficient and successful</span></div>
+                <div class="decade-row"><div class="decade-dot" style="background:#9FE1CB;"></div><span class="decade-label">1960s</span><span class="decade-desc">Less running, less success</span></div>
+                <div class="decade-row"><div class="decade-dot" style="background:#FAC775;"></div><span class="decade-label">1970s</span><span class="decade-desc">Run-heavy again, least successful</span></div>
+                <div class="decade-row"><div class="decade-dot" style="background:#F0997B;"></div><span class="decade-label">1980s</span><span class="decade-desc">Balanced run/pass; high success</span></div>
+                <div class="decade-row"><div class="decade-dot" style="background:#85B7EB;"></div><span class="decade-label">1990s</span><span class="decade-desc">More passing, modest success</span></div>
+                <div class="decade-row"><div class="decade-dot" style="background:#C0DD97;"></div><span class="decade-label">2000s</span><span class="decade-desc">Pass-first, slightly more successful</span></div>
+                <div class="decade-row"><div class="decade-dot" style="background:#5DCAA5;"></div><span class="decade-label">2010s</span><span class="decade-desc">Pass-dominant, highest scoring</span></div>
+              </div>
+              <p style="font-size:11px;color:var(--color-text-tertiary);margin-top:8px;">PC1 + PC2 explain 81.7% of total variance</p>
+            </div>
+          </div>
+        </div>
+        <p class="expand-hint">Click to expand ↓</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="portfolio-footer">
+    Jacob Sease · <a href="mailto:jakesease@yahoo.com" style="color:var(--color-text-tertiary);">jakesease@yahoo.com</a>
+  </div>
+
+</div>
+
+<script>
+  function toggleExpand(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.project-card.expanded').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+  }
+
+  function filterCards(btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    const cards = document.querySelectorAll('.project-card');
+    let shown = 0;
+    cards.forEach(card => {
+      const match = filter === 'all' || (card.dataset.category || '').includes(filter);
+      card.style.display = match ? '' : 'none';
+      if (match) shown++;
+    });
+    document.getElementById('showing-count').textContent =
+      `Showing ${shown} of ${document.querySelectorAll('.project-card').length}`;
+  }
+</script>
+
+</body>
+</html>
